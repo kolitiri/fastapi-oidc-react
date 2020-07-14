@@ -5,8 +5,6 @@ services:
     hostname: mongodb
     container_name: mongodb
     image: bitnami/mongodb:latest
-    environment:
-      - MONGODB_DATABASE=testdb
     ports:
       - "27017:27017"
     networks:

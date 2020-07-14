@@ -42,7 +42,7 @@ app = FastAPI()
 
 # Allow CORS. DON'T do that on production!
 origins = [
-	"http://localhost:3000",
+	config.FRONTEND_URL
 ]
 app.add_middleware(
 	CORSMiddleware,

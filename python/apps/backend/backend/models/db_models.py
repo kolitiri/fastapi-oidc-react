@@ -1,8 +1,6 @@
 import datetime
-from enum import Enum
-from typing import List, Optional
 
-from pydantic import BaseModel, Field, conint, conlist, constr
+from pydantic import BaseModel
 
 
 class InternalUser(BaseModel):
