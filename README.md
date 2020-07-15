@@ -2,7 +2,7 @@
 
 As the title describes, these are two separate applications (frontend: react, backend: FastApi) that together perform authentication via Google and Azure using the authorization code flow.
 
-There are probably a tone of options to make this work, but this is the one I came up with after reading a number or articles and also this "[bible](https://github.com/tiangolo/fastapi/issues/12)"
+There are probably a tone of options to make this work, but this is the one I came up with after reading a number or articles and also this [bible](https://github.com/tiangolo/fastapi/issues/12)..
 
 ## Architecture
 
@@ -46,9 +46,9 @@ Remember, our user is still not logged in into our system. Now we are going to p
 * The FastApi application redirects the user's browser once more and attaches the HTTPOnly cookie
 * The Frontend application now has an HTTPOnly cookie that is passed down in every request made from the frontend to the backend.
 
-So the user is now authenticated with our FastApi application and every time it visits our pages he doesn't need to authenticate with Google/Azure anymore.
+So the user is now authenticated with our FastApi application and every time it visits our pages he/she doesn't need to authenticate with Google/Azure anymore.
 
-Only when the access-token is expired (and you better make these cookies short live), he will have to login via Google/Azure again.
+Only when the access-token is expired (and you better make these cookies have a short life), he/she will have to login via Google/Azure again.
 
 See the diagram bellow for more details.
 
@@ -61,27 +61,27 @@ That was enough talking, how can you use it.
 Well this is probably going to be used for quite some debugging and playing around, thus I didn't bother containerizing anything apart from mongo. You can do that yourselves..
 
 1. Install pipenv if you don't have it already
-```
-pip install pipenv
-```
+	```
+	pip install pipenv
+	```
 
 2. Create mongo
-```
-make mongodb
-```
+	```
+	make mongodb
+	```
 
 3. Wait until mongo is up and run the FastApi app
-```
-cs python/apps/backend
-pipenv install
-pipenv run uvicorn backend.main:app --host 0.0.0.0
-```
+	```
+	cs python/apps/backend
+	pipenv install
+	pipenv run uvicorn backend.main:app --host 0.0.0.0
+	```
 
 4. Open another terminal and run the react app
-```
-cd react/apps/frontend
-npm start
-```
+	```
+	cd react/apps/frontend
+	npm start
+	```
 
 Your browser should automatically pop up at localhost:3000 and you should be able to see an awesome page.... with just two buttons..
 
@@ -107,8 +107,16 @@ JWT_SECRET_KEY= <generate this using "openssl rand -hex 32">
 
 Shove the above into  python/apps/backend/**.env** and you should be ready to go!
 
+## Caution!
+
+I am not a security engineer and not an OAuth/OIDC expert. I merely try to follow as much as possible the instructions I read online and test the code with the knowledge that I have.
+
+Always be aware and make sure you double and triple check the code if it is not yours.
+
+If you figure out that something is not right, please do let me know so that we can both benefit out of it.
+
 ## Acknowledgements
-Special thanks to **Sebastian Ramirez** for his awesome work in the [FastApi](https://fastapi.tiangolo.com/) project and to all those who contributed on this "[thread](https://github.com/tiangolo/fastapi/issues/12)". And maybe a few more threads that I might have missed...
+Special thanks to **Sebastian Ramirez** for his awesome work in the [FastApi](https://fastapi.tiangolo.com/) project and to all those who contributed to this [thread](https://github.com/tiangolo/fastapi/issues/12). And maybe a few more threads that I might have missed...
 
 ## Authors
 Chris Liontos
