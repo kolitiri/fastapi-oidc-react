@@ -110,6 +110,7 @@ Shove the above into  python/apps/backend/**.env** and you should be ready to go
 Also, do not forget that you will need to register your callback urls with Google and Azure once you create your dev accounts. The callbacks will be:
 * http://localhost:8000/google-login-callback/
 * http://localhost:8000/azure-login-callback/
+
 as shown in python/apps/backend/main.py, since you are going to be running this locally.
 
 ## Caution!
