@@ -29,7 +29,7 @@ This phase describes the steps up until the user is authenticated by Google/Azur
 * The user enters his credentials and authenticates
 * The external Auth provider's pop-up redirects the user's browser back to our FastApi application (callback-url) and passes an auth-token as a query parameter
 * The FastApi callback handler takes the auth-token and speaks directly to the external Auth provider in order to exchange it for an access-token
-* The FastApi application receives an access-token and uses it to speak to external Auth provider again in order to retrieve the user's information
+* The FastApi application receives an access-token and uses it to speak to external the Auth provider again in order to retrieve the user's information
 * The FastApi application receives the user's information and creates a new account in the database
 
 The is basically a normal OIDC authorization code flow. However, our user is still not logged in into our system.
@@ -42,7 +42,7 @@ Remember, our user is still not logged in into our system. Now we are going to p
 * The FastApi application generates a one time auth-token using the ID of the user that it just created in the database
 * The FastApi application redirects the user's browser to the home page and passes the auth-token as a query parameter
 * The Frontend application retrieves the auth-token from the query params and speaks back to the FastApi application in order to exchange it for an access-token
-* The FastApi application receives the auth-token, checks whether it is valid and not expired, and if everything is find, it generates a HTTPOnly secure cookie that contains an access-token.
+* The FastApi application receives the auth-token, checks whether it is valid and not expired, and if everything is fine, it generates a HTTPOnly secure cookie that contains an access-token.
 * The FastApi application redirects the user's browser once more and attaches the HTTPOnly cookie
 * The Frontend application now has an HTTPOnly cookie that is passed down in every request made from the frontend to the backend.
 
@@ -106,6 +106,11 @@ JWT_SECRET_KEY= <generate this using "openssl rand -hex 32">
 ```
 
 Shove the above into  python/apps/backend/**.env** and you should be ready to go!
+
+Also, do not forget that you will need to register your callback urls with Google and Azure once you create your dev accounts. The callbacks will be:
+* http://localhost:8000/google-login-callback/
+* http://localhost:8000/azure-login-callback/
+as shown in python/apps/backend/main.py, since you are going to be running this locally.
 
 ## Caution!
 
