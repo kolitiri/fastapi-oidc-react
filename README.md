@@ -72,7 +72,7 @@ Well this is probably going to be used for quite some debugging and playing arou
 
 3. Wait until mongo is up and run the FastApi app
 	```
-	cs python/apps/backend
+	cd python/apps/backend
 	pipenv install
 	pipenv run uvicorn backend.main:app --host 0.0.0.0
 	```
