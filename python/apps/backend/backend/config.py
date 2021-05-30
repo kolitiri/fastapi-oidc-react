@@ -27,8 +27,8 @@ GOOGLE_REDIRECT_URL = "http://localhost:8000/google-login-callback/"
 AZURE_CLIENT_ID = os.environ.get("AZURE_CLIENT_ID", None)
 AZURE_CLIENT_SECRET = os.environ.get("AZURE_CLIENT_SECRET", None)
 AZURE_TENANT_ID = os.environ.get("AZURE_TENANT_ID", None)
-AZURE_AUTHORITY = f"https://login.microsoftonline.com/common"
-AZURE_DISCOVERY_URL = "https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration"
+AZURE_AUTHORITY = os.environ.get("AZURE_AUTHORITY", f"https://login.microsoftonline.com/{AZURE_TENANT_ID}")
+AZURE_DISCOVERY_URL = f"{AZURE_AUTHORITY}/v2.0/.well-known/openid-configuration"
 AZURE_REDIRECT_URL = "http://localhost:8000/azure-login-callback/"
 
 # Front end endpoint
