@@ -56,34 +56,17 @@ See the diagram bellow for more details.
 
 ## Usage
 
-That was enough talking, how can you use it.
+That was enough talking, how can you use it:
 
-Well this is probably going to be used for quite some debugging and playing around, thus I didn't bother containerizing anything apart from mongo. You can do that yourselves..
+Start mongodb, the FastAPI backend and the React frontend using `docker-compose`.
 
-1. Install pipenv if you don't have it already
-	```
-	pip install pipenv
-	```
+```
+docker-compose up
+```
 
-2. Create mongo
-	```
-	make mongodb
-	```
+You can now navigate to `localhost:3000` in your browser and you should be able to see an awesome page.... with just two buttons..
 
-3. Wait until mongo is up and run the FastApi app
-	```
-	cd python/apps/backend
-	pipenv install
-	pipenv run uvicorn backend.main:app --host 0.0.0.0
-	```
-
-4. Open another terminal and run the react app
-	```
-	cd react/apps/frontend
-	npm start
-	```
-
-Your browser should automatically pop up at localhost:3000 and you should be able to see an awesome page.... with just two buttons..
+At `localhost:8000/docs` you can inspect the API documentation.
 
 ## Don't forget the extra steps
 
