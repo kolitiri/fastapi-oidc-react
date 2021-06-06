@@ -229,19 +229,21 @@ class AzureAuthProvider(AuthProvider):
 
 		# Request user's information from Azure
 		userinfo_response = requests.get(
-			# Currently userinfo_endpoint only returns "sub". We need to use /v1.0/users for other info
-			"https://graph.microsoft.com/v1.0/users",
+			# Currently userinfo_endpoint only returns "sub". We need to use /v1.0/me for other info
+			"https://graph.microsoft.com/v1.0/me",
 			headers={'Authorization': 'Bearer ' + access_token}
 		)
 
-		if userinfo_response.json().get("value"):
-			email = result["id_token_claims"]["email"]
-			sub_id = result["id_token_claims"]["sub"]
-			username = None
-			if userinfo_response.json()["value"]:
-				username = userinfo_response.json()["value"][0].get("givenName")
-		else:
+		response_data = userinfo_response.json()
+		username = response_data.get("userPrincipalName")
+		if not username:
 			raise UnauthorizedUser("User account not verified by Azure.")
+
+		email = response_data.get("mail")
+		if not email:
+			raise UnauthorizedUser("User account not verified by Azure.")
+
+		sub_id = result["id_token_claims"]["sub"]
 
 		external_user = ExternalUser(
 			email=email,

@@ -5,8 +5,38 @@ services:
     hostname: mongodb
     container_name: mongodb
     image: bitnami/mongodb:latest
+    networks:
+      - stack
+
+  frontend:
+    build:
+      context: ./react/apps/frontend
+      target: dev
+    volumes:
+      - ./react/apps/frontend:/app/:cached  # Mount code to allow for hot reloading
+      - ./react/apps/frontend/node_modules:/app/node_modules:cached
+    stdin_open: true
     ports:
-      - "27017:27017"
+      - 3000:3000
+    networks:
+      - stack
+
+  backend:
+    build:
+      context: ./python/apps/backend
+      target: dev
+    volumes:
+      - ./python/apps/backend:/app/:cached  # Mount code to allow for hot reloading
+    environment:
+      MONGODB_HOST: mongodb
+      GOOGLE_CLIENT_ID:
+      GOOGLE_CLIENT_SECRET:
+      AZURE_CLIENT_ID:
+      AZURE_CLIENT_SECRET:
+      AZURE_TENANT_ID:
+      JWT_SECRET_KEY:
+    ports:
+      - 8000:8000
     networks:
       - stack
 
